@@ -133,6 +133,23 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(image: AssetImage('graphics/newPlantPlaceholder.PNG')),
+            RaisedButton(
+              child: Text('New plant!'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SecondRoute()),
+                );
+              },
+
+              textColor: Colors.white,
+              color: Colors.lightGreen,
+              // Icon(
+              //   color: Colors.white,
+              //   Icons.nature,
+
+              // ),
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
@@ -148,6 +165,31 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Add New Plant',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class SecondRoute extends StatefulWidget {
+  @override
+  _SecondRouteState createState() => _SecondRouteState();
+}
+
+class _SecondRouteState extends State<SecondRoute> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped.
+            Navigator.pop(context);
+          },
+          child: Text('Done!'),
+        ),
+      ),
     );
   }
 }
