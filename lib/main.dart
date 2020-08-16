@@ -1,10 +1,9 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather/weather.dart';
+import "keys.dart";
 
+enum AppState { NOT_DOWNLOADED, DOWNLOADING, FINISHED_DOWNLOADING }
 void main() {
   runApp(MyApp());
 }
@@ -49,6 +48,10 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+
+  WeatherFactory wf = new WeatherFactory(weatherKey);
+  List<Weather> _weatherData = [];
+  AppState _stateWeather = AppState.NOT_DOWNLOADED;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
