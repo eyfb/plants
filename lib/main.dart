@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather/weather.dart';
+import 'dart:async';
 import "keys.dart";
 
 enum AppState { NOT_DOWNLOADED, DOWNLOADING, FINISHED_DOWNLOADING }
@@ -183,19 +184,46 @@ class SecondRoute extends StatefulWidget {
 }
 
 class _SecondRouteState extends State<SecondRoute> {
-  @override
+  //@override //do i need this override???
+  TextEditingController _controller;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Second Route"),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-            Navigator.pop(context);
-          },
-          child: Text('Done!'),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: _controller,
+              onSubmitted: (String value) async {
+                await showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Thanks!'),
+                      content: Text('You typed "$value".'),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+            RaisedButton(
+              onPressed: () {
+                // Navigate back to first route when tapped.
+                Navigator.pop(context);
+              },
+              child: Text('Done!'),
+            ),
+          ],
         ),
       ),
     );
