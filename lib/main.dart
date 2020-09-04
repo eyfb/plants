@@ -195,36 +195,67 @@ class _SecondRouteState extends State<SecondRoute> {
       body: Center(
         child: Column(
           children: <Widget>[
-            TextField(
-              decoration: const InputDecoration(
-                hintText: 'Enter your plant name',
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Enter your plant name',
+                ),
+                // validator: (value) {
+                //   if(value.isEmpty) {
+                //     return 'Please enter some text to name your plant!';
+                //   }
+                //   return null;
+                // }
+                controller: _controller,
+                onSubmitted: (String value) async {
+                  await showDialog<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Thanks!'),
+                        content: Text('You typed "$value".'),
+                        actions: <Widget>[
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }, //onSubmitted
               ),
-              // validator: (value) {
-              //   if(value.isEmpty) {
-              //     return 'Please enter some text to name your plant!';
-              //   }
-              //   return null;
-              // }
-              controller: _controller,
-              onSubmitted: (String value) async {
-                await showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Thanks!'),
-                      content: Text('You typed "$value".'),
-                      actions: <Widget>[
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }, //onSubmitted
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'How often do you water it? (in days)',
+                ),
+                controller: _controller,
+                onSubmitted: (String value) async {
+                  await showDialog<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Thanks!'),
+                        content: Text('You typed "$value".'),
+                        actions: <Widget>[
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }, //onSubmitted
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -249,13 +280,6 @@ class _SecondRouteState extends State<SecondRoute> {
               //   child: Text('Submit'),
               // ),
             ),
-            // RaisedButton(
-            //   onPressed: () {
-            //     // Navigate back to first route when tapped.
-            //     Navigator.pop(context);
-            //   },
-            //   child: Text('Return'),
-            // ),
           ],
         ),
       ),
