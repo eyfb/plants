@@ -83,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    var widget2 = widget;
     return Scaffold(
       // think of as function passed in appBar and body -> scaffold is class, returning value directly
       appBar: AppBar(
@@ -90,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.red,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget2.title),
       ),
       drawer: Drawer(
           child: ListView(padding: EdgeInsets.zero, children: <Widget>[
@@ -195,6 +196,15 @@ class _SecondRouteState extends State<SecondRoute> {
         child: Column(
           children: <Widget>[
             TextField(
+              decoration: const InputDecoration(
+                hintText: 'Enter your plant name',
+              ),
+              // validator: (value) {
+              //   if(value.isEmpty) {
+              //     return 'Please enter some text to name your plant!';
+              //   }
+              //   return null;
+              // }
               controller: _controller,
               onSubmitted: (String value) async {
                 await showDialog<void>(
@@ -214,15 +224,38 @@ class _SecondRouteState extends State<SecondRoute> {
                     );
                   },
                 );
-              },
+              }, //onSubmitted
             ),
-            RaisedButton(
-              onPressed: () {
-                // Navigate back to first route when tapped.
-                Navigator.pop(context);
-              },
-              child: Text('Done!'),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: RaisedButton(
+                onPressed: () {
+                  // Navigate back to first route when tapped.
+                  Navigator.pop(context);
+                },
+                child: Text('Return!'),
+              ),
+
+              // RaisedButton(
+              //   onPressed: () {
+              //     // Validate will return true if the form is valid, or false if
+              //     // the form is invalid.
+              //     if (_formKey.currentState.validate()) {
+              //       // Process data.
+              //       // Navigate back to first route when tapped.
+              //       Navigator.pop(context);
+              //     }
+              //   },
+              //   child: Text('Submit'),
+              // ),
             ),
+            // RaisedButton(
+            //   onPressed: () {
+            //     // Navigate back to first route when tapped.
+            //     Navigator.pop(context);
+            //   },
+            //   child: Text('Return'),
+            // ),
           ],
         ),
       ),
